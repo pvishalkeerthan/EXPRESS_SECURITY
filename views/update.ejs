@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Student</title>
+</head>
+<body>
+    <h1>Add New Student</h1>
+    <form action="/students/<%=student._id%>?_method=PUT" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="<%= student.name %>" required><br><br>
+
+        <label for="rollno">Roll Number:</label>
+        <input type="text" id="rollno" name="rollno" value="<%= student.rollno %>" required><br><br>
+
+        <label for="course">Course:</label>
+        <input type="text" id="course" name="course" value="<%= student.course %>" required><br><br>
+
+        <button type="submit">Update Student</button>
+    </form>
+</body> 
+</html>
