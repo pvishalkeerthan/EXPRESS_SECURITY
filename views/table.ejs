@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="app.css">
+
     <title>Document</title>
 </head>
 <body>
     <h1>Students</h1>
+    <button class="button"><a href="/students" class="href" style="text-decoration: none;">Add New Entry</a></button>
         <ul>
             <% a.forEach(student => { %>
                 <li>
                     Name: <%= student.name %><br>
                     Rollno: <%= student.rollno %><br>
                     Course: <%= student.course %><br>
-                    <a href="/students/<%=student.id%>/edit" class="href">Edit</a>
+                    <button class="button"><a href="/students/<%=student.id%>/edit" class="href" style="text-decoration: none;">Edit</a></button>
                 </li>
             <% }); %>
         </ul>
