@@ -61,15 +61,28 @@ app.post('/login', async (req, res) => {
             return res.render('login',{error:'Invalid username and password'});
         }
         const token = jwt.sign({userid: user._id}, "123",{ expiresIn: '1m' });
-        console.log("Token generated:", token);
         res.cookie('jwt',token,{httpOnly:true});
         res.render('home');
         console.log('login successful');
-    } catch (e) {s
+    } catch (e) {
         // Handle error
         res.status(500).send("Error in login");
     }
 });
+function authorizeToken(req,res,next){
+    const token=req.cookie.jwt;
+    if(!token){
+        return res.render('login');
+    }
+    jwt.verify(token,"123",(err,data)=>{
+        if(err){
+            return res.render('login')
+        }
+        req.userid=data.userid;
+        next();
+    })
+
+}
 
 // Register Page
         app.get('/register', (req, res) => {
@@ -102,6 +115,9 @@ app.get('/studentsn', async (req, res) => {
         // Handle error
         res.status(500).send('Error: ' + e.message);
     }
+});
+app.get('/home', authorizeToken, (req, res) => {
+    res.render('home');
 });
 
 // Home Page
